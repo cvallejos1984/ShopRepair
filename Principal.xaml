@@ -1,0 +1,36 @@
+﻿<Window x:Class="ShopRepair.Principal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShopRepair"
+        mc:Ignorable="d"
+        Title="Principal" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Text="Menu Principal" HorizontalAlignment="Center" FontSize="24" ></TextBlock>
+        <!--<Button x:Name="BtnClientes" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Content="Clientes" Click="Button_Click"></Button>-->
+        <Button x:Name="BtnProductos" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Content="Productos" Click="BtnProductos_Click"></Button>
+        <Button x:Name="BtnVehiculos" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Content="Vehículos" Click="BtnVehiculos_Click"></Button>
+        <Button x:Name="BtnOrdenes" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Content="Ordenes y Facturas" Click="BtnOrdenes_Click"></Button>
+        <!--<Button x:Name="BtnFacturas" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" Content="Facturas"></Button>-->
+        <Button x:Name="BtnUsuarios" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" Content="Usuarios" Click="BtnUsuarios_Click"></Button>
+    </Grid>
+</Window>
