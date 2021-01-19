@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:ShopRepair"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Ordenes" Height="600" Width="800">
-    <Grid>
+        
+        Title="Ordenes" Height="600" Width="800" WindowStartupLocation="CenterScreen" AutomationProperties.IsColumnHeader="False">
+    <Grid>               
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" ></ColumnDefinition>
             <ColumnDefinition Width="2*" ></ColumnDefinition>
@@ -18,6 +19,7 @@
             <ColumnDefinition Width="*" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -53,43 +55,48 @@
         <TextBlock Text="Modelo" Grid.Column="4" Grid.Row="5"  FontWeight="Bold"></TextBlock>
         <TextBlock Text="Año" Grid.Column="1" Grid.Row="6"  FontWeight="Bold"></TextBlock>
         <TextBlock Text="Doc Asociado" Grid.Column="4" Grid.Row="6"  FontWeight="Bold"></TextBlock>
-        <TextBlock Text="Descripcion" Grid.Column="4" Grid.Row="8"  FontWeight="Bold"></TextBlock>
-        <TextBlock Text="Codigo Producto" Grid.Column="1" Grid.Row="8"  FontWeight="Bold"></TextBlock>
-        <TextBlock Text="SubTotal" Grid.Column="4" Grid.Row="9"  FontWeight="Bold"></TextBlock>
-        <TextBlock Text="Cantidad" Grid.Column="1" Grid.Row="9"  FontWeight="Bold"></TextBlock>
-        <TextBlock Text="IVA" Grid.Column="1" Grid.Row="10"  FontWeight="Bold"></TextBlock>
-        <TextBlock Text="Total" Grid.Column="4" Grid.Row="10"  FontWeight="Bold"></TextBlock>
-        <DataGrid x:Name="DGItems" Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="4" Grid.RowSpan="7" SelectionChanged="DGItems_SelectionChanged" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FlowDirection="RightToLeft"/>
-        <Button x:Name="BtnAgregar" Content="Agregar Articulo" Grid.Column="5" Grid.Row="13" Margin="10.2,0,13.8,25.2" Grid.RowSpan="2" Click="BtnAgregar_Click" />
-        <Button x:Name="BtnEliminar" Grid.Column="5" Grid.Row="14" Margin="10.2,25,13.8,0" Grid.RowSpan="2" Content="Eliminar" Height="26" VerticalAlignment="Top" Click="BtnEliminar_Click"/>
-        <Button x:Name="BtnCrear" Grid.Column="5" Grid.Row="16" Margin="10.2,26.2,14.8,26" Grid.RowSpan="3" Content="Crear Doc" Click="BtnCrear_Click" IsEnabled="False"/>
+        <TextBlock Text="Descripcion" Grid.Column="4" Grid.Row="9"  FontWeight="Bold"></TextBlock>
+        <TextBlock Text="Codigo Producto" Grid.Column="1" Grid.Row="9"  FontWeight="Bold"></TextBlock>
+        <TextBlock Text="Precio" Grid.Column="1" Grid.Row="10"  FontWeight="Bold"></TextBlock>
+        <TextBlock Text="SubTotal" Grid.Column="4" Grid.Row="10"  FontWeight="Bold"></TextBlock>
+        <TextBlock Text="Cantidad" Grid.Column="1" Grid.Row="11"  FontWeight="Bold"></TextBlock>
+        <TextBlock Text="IVA" Grid.Column="1" Grid.Row="12"  FontWeight="Bold"></TextBlock>
+        <TextBlock Text="Total" Grid.Column="4" Grid.Row="11"  FontWeight="Bold"></TextBlock>
+        <TextBlock x:Name="Fecha" Text="Fecha" Grid.Column="4" Grid.Row="7"  FontWeight="Bold"></TextBlock>
+        <DatePicker x:Name="DTfecha" Grid.Column="5" HorizontalAlignment="Left" Grid.Row="7" Grid.RowSpan="2" VerticalAlignment="Top"/>
+        <DataGrid x:Name="DGItems" Grid.Column="1" Grid.Row="14" Grid.ColumnSpan="4" Grid.RowSpan="7" SelectionChanged="DGItems_SelectionChanged" CanUserReorderColumns="True" CanUserResizeColumns="True" CanUserSortColumns="False" CanUserResizeRows="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <Button x:Name="BtnAgregar" Content="Agregar Articulo" Grid.Column="5" Grid.Row="15" Margin="10.2,0,13.8,25.2" Grid.RowSpan="2" Click="BtnAgregar_Click" />
+        <Button x:Name="BtnEliminar" Grid.Column="5" Grid.Row="16" Margin="10.2,25,13.8,0" Grid.RowSpan="2" Content="Eliminar" Height="26" VerticalAlignment="Top" Click="BtnEliminar_Click"/>
+        <Button x:Name="BtnCrear" Grid.Column="5" Grid.Row="18" Margin="10.2,26.2,14.8,26" Grid.RowSpan="3" Content="Crear Doc" Click="BtnCrear_Click" IsEnabled="False"/>
         <TextBox x:Name="TxtConsecutivo" Grid.Column="2" Grid.Row="1" Text="0"></TextBox>
         <TextBox x:Name="TxtCodCliente" Grid.Column="2" Grid.Row="2" Text="0" x:FieldModifier="public"></TextBox>
-        <TextBox x:Name="TxtCedula" Grid.Column="2" Grid.Row="3" Text="0" AcceptsTab="True" KeyDown="TxtCedula_KeyDown"/>
+        <TextBox x:Name="TxtCedula" ToolTip="2.Ingrese cedula y presione enter" Grid.Column="2" Grid.Row="3" Text="0" AcceptsTab="True" KeyDown="TxtCedula_KeyDown"/>
         <TextBox x:Name="TxtVeh" Grid.Column="2" Grid.Row="4"></TextBox>
         <TextBox x:Name="TxtNombre" Grid.Column="5" Grid.Row="2" AcceptsTab="True" KeyDown="TxtNombre_KeyDown"></TextBox>
         <TextBox x:Name="TxtTelefono" Grid.Column="5" Grid.Row="3"></TextBox>
         <!--<TextBox x:Name="TxtPlaca" Grid.Column="5" Grid.Row="4"></TextBox>-->
         <ComboBox Name="CbPlaca" Grid.Column="5" Grid.Row="4" SelectionChanged="CbPlaca_SelectionChanged"></ComboBox>
         <TextBox x:Name="TxtDocAsc" Grid.Column="5" Grid.Row="6" Text="0"></TextBox>
-        <TextBox x:Name="TxtCodigoItem" Grid.Column="2" Grid.Row="8"></TextBox>
-        <TextBox x:Name="TxtCantidad" Grid.Column="2" Grid.Row="9" AcceptsTab="True" KeyDown="TxtCantidad_KeyDown"></TextBox>
-        <TextBox x:Name="TxtSubTotal" Grid.Column="5" Grid.Row="9"></TextBox>
-        <TextBox x:Name="TxtTotal" Grid.Column="5" Grid.Row="10"></TextBox>
-        <TextBox x:Name="TxtIva" Grid.Column="2" Grid.Row="10"></TextBox>
+        <TextBox x:Name="TxtCodigoItem" Grid.Column="2" Grid.Row="9"></TextBox>
+        <TextBox x:Name="TxtPrecio" Grid.Column="2" Grid.Row="10"></TextBox>
+        <TextBox x:Name="TxtCantidad" Grid.Column="2" Grid.Row="11" AcceptsTab="True" KeyDown="TxtCantidad_KeyDown"></TextBox>
+        <TextBox x:Name="TxtSubTotal" Grid.Column="5" Grid.Row="10"></TextBox>
+        <TextBox x:Name="TxtTotal" Grid.Column="5" Grid.Row="11"></TextBox>
+        <TextBox x:Name="TxtIva" Grid.Column="2" Grid.Row="12"></TextBox>
         <TextBox x:Name="TxtModelo" Grid.Column="5" Grid.Row="5"></TextBox>
         <TextBox x:Name="TxtMarca" Grid.Column="2" Grid.Row="5"></TextBox>
         <TextBox x:Name="TxtYear" Grid.Column="2" Grid.Row="6"></TextBox>
-        <ComboBox x:Name="CBTipo" Grid.Column="5" Grid.Row="1">
+        <ComboBox x:Name="CBTipo" Grid.Column="5" Grid.Row="1" ToolTip="1.Escoga el tipo de documento">
             <ComboBoxItem Content="Orden"/>
             <ComboBoxItem Content="Factura"/>
         </ComboBox>
-        <Button Grid.Column="6" Grid.Row="6" Margin="20.4,0.4,16.6,0" Click="Button_Click" >
-            <Image Source="C:\Users\cvallejos\Pictures\savedisk_floppydisk_guardar_1543.png" Stretch="Fill"></Image>
+        <Button Grid.Column="6" Grid.Row="6" Margin="20.4,0.4,16.6,0" Click="Button_Click" AutomationProperties.HelpText="2.Guarde para continuar" >
+            <Image Source="C:\Users\claren vallejos\Pictures\Imagenes\savedisk_floppydisk_guardar_1543.png" Stretch="Fill"></Image>
         </Button>
-        <ComboBox x:Name="CB_Items" Grid.Column="5" Grid.Row="8" SelectionChanged="CB_Items_SelectionChanged"></ComboBox>
-        <Button x:Name="BtnBuscar" Grid.Column="3" Grid.Row="2" Margin="12.2,0,19.8,0.4" Click="BtnBuscar_Click">
-            <Image Source="C:\Users\cvallejos\Pictures\buscr.png"></Image>
+        <ComboBox x:Name="CB_Items" Grid.Column="5" Grid.Row="9" SelectionChanged="CB_Items_SelectionChanged"></ComboBox>
+        <Button x:Name="BtnBuscar" ToolTip="3.Buscar/Agregar Clientes" BorderBrush="Silver" Grid.Column="3" Grid.Row="2" Margin="12.2,0,19.8,0.4" Click="BtnBuscar_Click">
+            <Image Source="C:\Users\claren vallejos\Pictures\Imagenes\buscr.png"></Image>
         </Button>
+       
     </Grid>
 </Window>

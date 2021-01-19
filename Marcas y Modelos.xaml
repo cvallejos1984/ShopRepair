@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ShopRepair"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Marcas_y_Modelos" Height="300" Width="450">
+        Title="Marcas_y_Modelos" Height="300" Width="450" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" ></ColumnDefinition>

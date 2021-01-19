@@ -10,17 +10,18 @@ namespace ShopRepair
     class ControlDocs
     {
         BaseDatos BaseDatos = new BaseDatos();
-        public void Acciones(string Accion, EntidadDoc Entidad)
+        public int Acciones(string Accion, EntidadDoc Entidad)
         {
+            int DT = 0;
             string sql;
             switch (Accion)
             {
                 case "agregar":
                     {
-                        sql = " insert into public.ordenes(id_cliente, id_vehiculo, nombre,cedula,telefono1, placa,marca,modelo,year,tipo) values ('" + Entidad.IdCliente + "','" + Entidad.IdVehiculo + "','" + Entidad.Nombre + "','" + Entidad.Cedula + "','" + Entidad.Tel1 + "','" + Entidad.Placa + "','" + Entidad.Marca + "','" + Entidad.Modelo + "','" + Entidad.Year + "','" + Entidad.Tipo + "');";
-
-                        BaseDatos.EjecutarSQL(sql);
+                        sql = " insert into public.ordenes(cliente, vehiculo, nombre,cedula,tel1, plac_veh,marca_veh,modelo_veh,year_veh,tipo_doc,fecha) values ('" + Entidad.IdCliente + "','" + Entidad.IdVehiculo + "','" + Entidad.Nombre + "','" + Entidad.Cedula + "','" + Entidad.Tel1 + "','" + Entidad.Placa + "','" + Entidad.Marca + "','" + Entidad.Modelo + "','" + Entidad.Year + "','" + Entidad.Tipo + "','"+ Entidad.fecha +"') returning id_orden;";
+                        DT = BaseDatos.EjecutarSQLordenes(sql);
                         break;
+                        
                     }
                 case "modificar":
                     {
@@ -38,6 +39,7 @@ namespace ShopRepair
                 default:
                     break;
             }
+            return DT;
         }
         public DataSet DevolverDatos()
         {
@@ -56,6 +58,13 @@ namespace ShopRepair
         public DataSet DevolverDato()
         {
             string sql = "Select max(id_orden) from ordenes ";
+            DataSet DS = new DataSet();
+            DS = BaseDatos.LlenarDS(sql);
+            return DS;
+        }
+        public DataSet DevolverOrdenes(string dato)
+        {
+            string sql = "Select * from ordenes where cedula like '" + dato + "' or placa like '"+ dato +"' ";
             DataSet DS = new DataSet();
             DS = BaseDatos.LlenarDS(sql);
             return DS;

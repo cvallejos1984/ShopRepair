@@ -6,16 +6,16 @@
         xmlns:local="clr-namespace:ShopRepair"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Vehiculos" Height="450" Width="800">
+        Title="Vehiculos" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" ></ColumnDefinition>
-            <ColumnDefinition Width="150" ></ColumnDefinition>
-            <ColumnDefinition Width="150" ></ColumnDefinition>
-            <ColumnDefinition Width="150" ></ColumnDefinition>
-            <ColumnDefinition Width="150" ></ColumnDefinition>
-            <ColumnDefinition Width="100" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -54,10 +54,10 @@
         <TextBox x:Name="TxtYear" Grid.Column="4" Grid.Row="3"></TextBox>
         <TextBox x:Name="TxtCodCliente" Grid.Column="4" Grid.Row="4"></TextBox>
         <Button x:Name="TxtAbrir" Grid.Column="5" Grid.Row="2" Margin="11.2,6,68.8,6" ScrollViewer.CanContentScroll="True" VerticalContentAlignment="Stretch" FontWeight="Bold" Click="TxtAbrir_Click">
-            <Image Source="C:\Users\cvallejos\Pictures\plus.png"></Image>
+            <Image Source="C:\Users\claren vallejos\Pictures\Imagenes\plus.png"></Image>
         </Button>
         <Button x:Name="TxtAct" Grid.Column="5" Grid.Row="2" Margin="0,6,27.8,6" ScrollViewer.CanContentScroll="True" VerticalContentAlignment="Stretch" FontWeight="Bold" RenderTransformOrigin="2.08,0.65" HorizontalAlignment="Right" Click="TxtAct_Click">
-            <Image Source= "C:\Users\cvallejos\Pictures\act.png"></Image>
+            <Image Source= "C:\Users\claren vallejos\Pictures\Imagenes\act.png"></Image>
         </Button>
         <!--<TextBox Grid.Column="4" Grid.Row="3"></TextBox>
             <TextBox Grid.Column="4" Grid.Row="4"></TextBox>-->

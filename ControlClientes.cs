@@ -20,7 +20,7 @@ namespace ShopRepair
             {
                 case "agregar":
                     {
-                        sql = " insert into public.clientes(cedula, nombre, telefono1,telefono2,telefono3, correo,direccion,tipo) values ('" + Entidad.Cedula + "','" + Entidad.Nombre + "','" + Entidad.Telefono1 + "','" + Entidad.Telefono2 + "','" + Entidad.Telefono3 + "','" + Entidad.Correo + "','" + Entidad.Direccion + "','" + Entidad.Tipo + "');";
+                        sql = " insert into public.clientes(cedulaid, nombrec, telefono1,telefono2,telefono3, correo,direccion,tipo) values ('" + Entidad.Cedula + "','" + Entidad.Nombre + "','" + Entidad.Telefono1 + "','" + Entidad.Telefono2 + "','" + Entidad.Telefono3 + "','" + Entidad.Correo + "','" + Entidad.Direccion + "','" + Entidad.Tipo + "');";
 
                         BaseDatos.EjecutarSQL(sql);
                         break;
@@ -52,7 +52,7 @@ namespace ShopRepair
 
         public DataSet DevolverCliente(string cedula)
         {
-            string sql = "Select * from clientes where cedula = '"+ cedula +"' ";
+            string sql = "Select * from clientes where cedulaid = '"+ cedula +"' ";
             DataSet DS = new DataSet();
             DS = BaseDatos.LlenarDS(sql);
             return DS;
@@ -60,7 +60,7 @@ namespace ShopRepair
 
         public DataSet DevolverDato(string filtro)
         {
-            string sql = "Select * from clientes where cedula like '%" + filtro + "%' or nombre like '%"+ filtro +"%' ";
+            string sql = "Select * from clientes where cedulaid like '%" + filtro + "%' or nombre like '%"+ filtro +"%' ";
             DataSet DS = new DataSet();
             DS = BaseDatos.LlenarDS(sql);
             return DS;

@@ -8,7 +8,7 @@ namespace ShopRepair
 {
     class EntidadDoc
     {
-        private string  mIdCliente, mIdProducto, mIdVehiculo, mNombre, mCedula, mTel1, mPlaca, mMarca, mModelo, mYear, mTipo;
+        private string  mIdCliente, mIdProducto, mIdVehiculo, mNombre, mCedula, mTel1, mPlaca, mMarca, mModelo, mYear, mTipo,mfecha;
         private int mIdOrden,mIdAsc;
 
         public string  IdCliente
@@ -20,6 +20,18 @@ namespace ShopRepair
             set
             {
                 mIdCliente = value;
+            }
+        }
+
+        public string fecha
+        {
+            get
+            {
+                return mfecha;
+            }
+            set
+            {
+                mfecha = value;
             }
         }
         public string IdProducto

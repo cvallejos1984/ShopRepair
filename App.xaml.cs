@@ -5,6 +5,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Threading;
+using System.Globalization;
+using System.Windows.Markup;
 
 namespace ShopRepair
 {
@@ -13,5 +16,7 @@ namespace ShopRepair
     /// </summary>
     public partial class App : Application
     {
+       
+        
     }
 }

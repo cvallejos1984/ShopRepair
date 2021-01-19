@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShopRepair"
         mc:Ignorable="d"
-        Title="Principal" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Principal" Height="450" Width="800" WindowStartupLocation="CenterScreen" FontStretch="Expanded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" ></ColumnDefinition>
@@ -27,10 +27,10 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Text="Menu Principal" HorizontalAlignment="Center" FontSize="24" ></TextBlock>
         <!--<Button x:Name="BtnClientes" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Content="Clientes" Click="Button_Click"></Button>-->
-        <Button x:Name="BtnProductos" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Content="Productos" Click="BtnProductos_Click"></Button>
-        <Button x:Name="BtnVehiculos" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Content="Vehículos" Click="BtnVehiculos_Click"></Button>
-        <Button x:Name="BtnOrdenes" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Content="Ordenes y Facturas" Click="BtnOrdenes_Click"></Button>
-        <!--<Button x:Name="BtnFacturas" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" Content="Facturas"></Button>-->
-        <Button x:Name="BtnUsuarios" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" Content="Usuarios" Click="BtnUsuarios_Click"></Button>
+        <Button x:Name="BtnProductos" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Content="Productos" Click="BtnProductos_Click" FontWeight="Bold" FontSize="14" FlowDirection="RightToLeft"></Button>
+        <Button x:Name="BtnVehiculos" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Content="Vehículos" Click="BtnVehiculos_Click" FontWeight="Bold" FontSize="14"></Button>
+        <Button x:Name="BtnOrdenes" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Content="Ordenes" Click="BtnOrdenes_Click" FontWeight="Bold" FontSize="14"></Button>
+        <Button x:Name="BtnGastos" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Content="Gastos" FontWeight="Bold" FontSize="14"></Button>
+        <Button x:Name="BtnUsuarios" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" Content="Usuarios" Click="BtnUsuarios_Click" FontWeight="Bold" FontSize="14"></Button>
     </Grid>
 </Window>

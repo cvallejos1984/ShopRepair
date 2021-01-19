@@ -48,14 +48,14 @@ namespace ShopRepair
             {
                 case "agregar":
                     {
-                        sql = " insert into public.modelos(id_marca,modelo) values ('" + Entidad.IdMarca + "','" + Entidad.Modelo + "');";
+                        sql = " insert into public.modelos(marca,modelo) values ('" + Entidad.IdMarca + "','" + Entidad.Modelo + "');";
 
                         BaseDatos.EjecutarSQL(sql);
                         break;
                     }
                 case "modificar":
                     {
-                        sql = " update public.modelos set id_marca = '" + Entidad.IdMarca + "', modelo = '" + Entidad.Modelo + "' where id_modelo = '" + Entidad.IdModelo + "'";
+                        sql = " update public.modelos set marca = '" + Entidad.IdMarca + "', modelo = '" + Entidad.Modelo + "' where id_modelo = '" + Entidad.IdModelo + "'";
                         BaseDatos.EjecutarSQL(sql);
                         break;
                     }

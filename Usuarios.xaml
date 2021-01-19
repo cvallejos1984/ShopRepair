@@ -6,16 +6,16 @@
         xmlns:local="clr-namespace:ShopRepair"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Usuarios" Height="450" Width="800">
+        Title="Usuarios" Height="450" Width="800" WindowStartupLocation="CenterScreen">
    
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" ></ColumnDefinition>
-            <ColumnDefinition Width="150" ></ColumnDefinition>
-            <ColumnDefinition Width="150" ></ColumnDefinition>
-            <ColumnDefinition Width="150" ></ColumnDefinition>
-            <ColumnDefinition Width="150" ></ColumnDefinition>
-            <ColumnDefinition Width="100" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -67,9 +67,8 @@
                 <ColumnDefinition Width="*" ></ColumnDefinition>
                 <ColumnDefinition Width="3*" ></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Aceptar" Click="Button_Click_1"></Button>
-            <Button Grid.Column="2" Content="Salir" Click="Button_Click"></Button>
+            <Button Grid.Column="0" Content="Aceptar" Click="Button_Click_1" FontWeight="Bold"></Button>
+            <Button Grid.Column="2" Content="Salir" Click="Button_Click" FontWeight="Bold"></Button>
         </Grid>
-        <Menu Grid.ColumnSpan="2" Grid.Column="4" HorizontalAlignment="Left" Height="100" Margin="52.6,2,0,0" Grid.Row="7" Grid.RowSpan="4" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>

@@ -9,7 +9,7 @@ namespace ShopRepair
     class EntidadLineas
     {
         private int mIdLinea,mIdFactura, mIdProducto, mCantidad,mIdAsc;
-        private decimal mPrecio, mIVA,mTotal,mSubTotal;
+        private string mPrecio, mIVA,mTotal,mSubTotal;
         private string mPago;
 
         public string Pago
@@ -78,7 +78,7 @@ namespace ShopRepair
                 mCantidad = value;
             }
         }
-        public decimal Precio
+        public string Precio
         {
             get
             {
@@ -89,7 +89,7 @@ namespace ShopRepair
                 mPrecio = value;
             }
         }
-        public decimal IVA
+        public string IVA
         {
             get
             {
@@ -100,7 +100,7 @@ namespace ShopRepair
                 mIVA = value;
             }
         }
-        public decimal Total
+        public string Total
         {
             get
             {
@@ -111,7 +111,7 @@ namespace ShopRepair
                 mTotal = value;
             }
         }
-        public decimal SubTotal
+        public string SubTotal
         {
             get
             {

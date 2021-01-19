@@ -13,12 +13,12 @@ namespace ShopRepair
     {
         public NpgsqlConnection DB = new NpgsqlConnection();
         public NpgsqlDataReader DR;
-        public NpgsqlCommand CMD;
+        //public NpgsqlCommand CMD;
            
 
         public void ConectarDB()
         {
-            string cadenaconexion = "Username=postgres;Password= Aledezma;Host=localhost;Port =5432; DataBase=shop";
+            string cadenaconexion = "Username=postgres;Password= #;Host=localhost;Port =5432; DataBase=#";
 
             DB.ConnectionString = cadenaconexion;
             DB.Open();
@@ -33,6 +33,16 @@ namespace ShopRepair
             NpgsqlCommand Comando = new NpgsqlCommand(sql, DB);
             Comando.ExecuteNonQuery();
             DesconectarDB();
+        }
+
+        public int EjecutarSQLordenes(string sql)
+        {
+           // int DT = 0;
+            ConectarDB();
+            NpgsqlCommand Comando = new NpgsqlCommand(sql, DB);
+           int DT = Convert.ToInt32(Comando.ExecuteScalar());
+            DesconectarDB();
+            return DT;            
         }
 
 
@@ -104,7 +114,7 @@ namespace ShopRepair
         public void Modelos(ComboBox cb, int marca)
         {
             ConectarDB();
-            NpgsqlCommand Comando = new NpgsqlCommand("Select * from modelos where id_marca = '"+ marca +"'", DB);
+            NpgsqlCommand Comando = new NpgsqlCommand("Select * from modelos where marca = '"+ marca +"'", DB);
             DR = Comando.ExecuteReader();
             while (DR.Read())
             {
@@ -129,7 +139,7 @@ namespace ShopRepair
         public void Placas(ComboBox cb,string cliente)
         {
             ConectarDB();
-            NpgsqlCommand Comando = new NpgsqlCommand("Select placa from vehiculos where id_cliente = '"+ cliente +"'", DB);
+            NpgsqlCommand Comando = new NpgsqlCommand("Select placa from vehiculos where client = '"+ cliente +"'", DB);
             DR = Comando.ExecuteReader();
             while (DR.Read())
             {

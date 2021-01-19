@@ -14,9 +14,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
+using System.Threading;
+using System.Globalization;
+using System.Windows.Threading;
 
 namespace ShopRepair
 {
+
     /// <summary>
     /// Lógica de interacción para Ordenes.xaml
     /// </summary>
@@ -28,22 +32,32 @@ namespace ShopRepair
         ControlDocs Control = new ControlDocs();
         BaseDatos Datos = new BaseDatos();
         ControlLineas ControlLin = new ControlLineas();
-        decimal Precio = 0;
+       // decimal Precio = 0;
         int index = 0;
-       // int x = 0;
+        CultureInfo usCulture = new CultureInfo("es-US");
+        // int x = 0;
         DataTable DSItems = new DataTable();
         public Ordenes()
         {
             InitializeComponent();
+            //DispatcherTimer LiveTime = new DispatcherTimer();
+            //LiveTime.Interval = TimeSpan.FromSeconds(1);
+            //LiveTime.Tick += timer_Tick;
+            //LiveTime.Start();
         }
+
+        //void timer_Tick(object sender, EventArgs e)
+        //{
+        //    Fecha.Text = DateTime.Now.ToString("dd/M/yyyy HH:mm:ss");
+        //}
         private void LlenarCliente()
         {
-            if (Datos.DatoRepetido("clientes", "cedula", TxtCedula.Text))
+            if (Datos.DatoRepetido("clientes", "cedulaid", TxtCedula.Text))
             {
                 DataSet DS = new DataSet();
                 DS = ControlCL.DevolverCliente(TxtCedula.Text);
                 TxtCodCliente.Text = Convert.ToString(DS.Tables[0].Rows[0]["id_cliente"]);
-                TxtNombre.Text = Convert.ToString(DS.Tables[0].Rows[0]["nombre"]);
+                TxtNombre.Text = Convert.ToString(DS.Tables[0].Rows[0]["nombrec"]);
                 TxtTelefono.Text = Convert.ToString(DS.Tables[0].Rows[0]["telefono1"]);
                 LlenarVeh();
             }
@@ -94,22 +108,40 @@ namespace ShopRepair
         }
         private void CB_Items_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataSet Ds = new DataSet();
-            Ds = ControlItem.DevolverItem(Convert.ToString(CB_Items.SelectedValue));
-            TxtCodigoItem.Text = Convert.ToString(Ds.Tables[0].Rows[0]["id_producto"]);
-            Precio = Convert.ToDecimal(Ds.Tables[0].Rows[0]["precio_s_iva"]);
+            try
+            {
+                DataSet Ds = new DataSet();
+                Ds = ControlItem.DevolverItem(Convert.ToString(CB_Items.SelectedValue));
+                TxtCodigoItem.Text = Convert.ToString(Ds.Tables[0].Rows[0]["id_producto"]);
+                TxtPrecio.Text = Convert.ToString(Ds.Tables[0].Rows[0]["precio_s_iva"]);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        
         }
         private void Calculos()
         {
-            Decimal Subtotal = Math.Round(Precio * Convert.ToDecimal(TxtCantidad.Text),2);
-            Double Mimp = 0.13;
-            Decimal IVA = Math.Round(Subtotal * Convert.ToDecimal(Mimp),2);
-            Decimal Total = Math.Round(Subtotal + IVA,2);
-            TxtSubTotal.Text = Convert.ToString(Subtotal);
-            TxtIva.Text = Convert.ToString(IVA);
-            TxtTotal.Text = Convert.ToString(Total);
+            try
+            {
+                Decimal Precio = Convert.ToDecimal(TxtPrecio.Text);
+                Decimal Subtotal = Math.Round(Precio * Convert.ToDecimal(TxtCantidad.Text), 2);
+                Double Mimp = 0.13;
+                Decimal IVA = Math.Round(Subtotal * Convert.ToDecimal(Mimp), 2);
+                Decimal Total = Math.Round(Subtotal + IVA, 2);
+                TxtSubTotal.Text = Convert.ToString(Subtotal);
+                TxtIva.Text = Convert.ToString(IVA);
+                TxtTotal.Text = Convert.ToString(Total);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
         private void TxtCantidad_KeyDown(object sender, KeyEventArgs e)
+        
         {
             if (e.Key == Key.Enter)
             {
@@ -164,24 +196,26 @@ namespace ShopRepair
         
         private void AceptarEnc()
         {
+          
             EntidadDoc Entidad = new EntidadDoc
             {
                 IdOrden = Convert.ToInt16(TxtConsecutivo.Text),
                 IdCliente = TxtCodCliente.Text,
                 IdVehiculo = TxtVeh.Text,
                 Nombre = TxtNombre.Text,
-                Cedula= TxtCedula.Text,
+                Cedula = TxtCedula.Text,
                 Tel1 = TxtTelefono.Text,
                 Placa = CbPlaca.Text,
                 Marca = TxtMarca.Text,
                 Modelo = TxtModelo.Text,
                 Year = TxtYear.Text,
                 IdAsc = Convert.ToInt16(TxtDocAsc.Text),
-                Tipo = CBTipo.Text
-                };
+                Tipo = CBTipo.Text,
+                fecha = DTfecha.SelectedDate.ToString()
+            };
             try
             {
-                if (CBTipo.Text == "" | TxtCodCliente.Text == "" | TxtVeh.Text == "" | TxtNombre.Text == "" | TxtCedula.Text == "")
+                if (CBTipo.Text == "" | TxtCodCliente.Text == "" | TxtVeh.Text == "" | TxtNombre.Text == "" | TxtCedula.Text == "" | DTfecha.Text =="")
                 {
                     MostrarBox();
                     return;
@@ -195,19 +229,17 @@ namespace ShopRepair
                     }
                     else
                     {
-                        Control.Acciones("agregar", Entidad);
+                      int DT = Control.Acciones("agregar", Entidad);
+                        TxtConsecutivo.Text = DT.ToString();
                         MostrarBoxAceptar();
                     }
-
                 }
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
-
+                return;
             }
-
         }
         private void MostrarBox()
         {
@@ -218,23 +250,36 @@ namespace ShopRepair
             MessageBox.Show("Dato ingresado", Title, MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)//boton agregar orden
         {
             AceptarEnc();
-            LlenarIdOrden();
-            LlenarDocAsc();
+          //  LlenarIdOrden();
+            if (TxtConsecutivo.Text != "0")
+            {
+                LlenarDocAsc();
+            }
+            return;
+            
         }
-        private void LlenarIdOrden()
-        {
-            DataSet DS = new DataSet();
-            DS = Control.DevolverDato();
-            TxtConsecutivo.Text = Convert.ToString(DS.Tables[0].Rows[0][0]);
-        }
+        //private void LlenarIdOrden()
+        //{
+        //    DataSet DS = new DataSet();
+        //    DS = Control.DevolverDato();
+        //    TxtConsecutivo.Text = Convert.ToString(DS.Tables[0].Rows[0][0]);
+        //}
         private void LlenarDocAsc()
         {
-            DataSet DS = new DataSet();
-            DS = Control.DevolverAsc(TxtConsecutivo.Text);
-            TxtDocAsc.Text = Convert.ToString(DS.Tables[0].Rows[0][0]);
+            try
+            {
+                DataSet DS = new DataSet();
+                DS = Control.DevolverAsc(TxtConsecutivo.Text);
+                TxtDocAsc.Text = Convert.ToString(DS.Tables[0].Rows[0][0]);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+         
         }
 
         private void AceptarLin()
@@ -243,6 +288,7 @@ namespace ShopRepair
             {
                 for (int i = 0; i < DSItems.Rows.Count; i++)
                 {
+                    
                     DataTable data = new DataTable();
                     data = ((DataView)DSItems.DefaultView).ToTable();
                     EntidadLineas Entidad = new EntidadLineas
@@ -250,12 +296,12 @@ namespace ShopRepair
                         IdLinea = i,
                         IdFactura = Convert.ToInt16(TxtConsecutivo.Text),
                         IdProducto = Convert.ToInt16(data.Rows[i]["Codigo"].ToString()),
-                        Precio = Math.Round(Precio, 2),
-                        IVA = Math.Round(Convert.ToDecimal(data.Rows[i]["IVA"].ToString()), 2),
-                        Total = Math.Round(Convert.ToDecimal(data.Rows[i]["Total"].ToString()), 2),
+                        Precio = TxtPrecio.Text,
+                        IVA = data.Rows[i]["IVA"].ToString(),
+                        SubTotal = data.Rows[i]["Subtotal"].ToString(),
+                        Total = data.Rows[i]["Total"].ToString(),
                         IdAsc = Convert.ToInt16(TxtDocAsc.Text),
                         Cantidad = Convert.ToInt16(data.Rows[i]["Cantidad"].ToString()),
-                        SubTotal = Math.Round(Convert.ToDecimal(data.Rows[i]["Subtotal"].ToString()), 2)
                     };
                     if (TxtDocAsc.Text == "")
                     {
@@ -276,6 +322,7 @@ namespace ShopRepair
         private void BtnCrear_Click(object sender, RoutedEventArgs e)
         {
             AceptarLin();
+            this.Close();
         }
         private void DGItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -316,6 +363,7 @@ namespace ShopRepair
 
 
         }
+
     }
     
 }
